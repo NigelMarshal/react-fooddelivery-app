@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+const Search = ({ onChange, placeholder }) => {
     return (
         <div className="container mx-auto pt-6">
             <h2 className="flex justify-left max-w-screen-sm mx-auto px-10 pb-5">Search</h2>
@@ -10,7 +10,7 @@ const Search = () => {
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
                             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </button>
-                    <input type="text" name="query" placeholder="Search for dishes..."
+                    <input type="text" name="query" placeholder={placeholder} onChange={onChange}
                         className="appearance-none w-full outline-none focus:outline-none active:outline-none" />
                 </form>
             </div>
