@@ -1,33 +1,44 @@
 import './DishItem.css';
 import React, { useState, useEffect } from 'react'
+import _ from 'underscore'
 
-let clickArr = []
+
+let clickedItems = []
 const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelectedItem }) => {
 
     const [selected, setSelected] = useState();
     const [selectedCount, setSelectedCount] = useState(0);
-    let clickedItem = []
+
     const handleMenuItem = () => {
-        // setSelectedCount(selectedCount + 1);
-        // 
         setSelected(true);
-        let clickedName = menuItems.name
-        // console.log(menuItems.name)
-        clickArr.push(clickedName)
-        console.log(clickArr)
-
-        // localStorage.setItem("Clicked", clickedItem)
-
-        // let currentSelected = 0;
-        // currentSelected++;
-        // 
-
+        console.log("menuItem", menuItems);
+        if (menuItems.allowedClicks - 1) {
+            let clickedDish = menuItems.name
+            clickedItems.push(clickedDish)
+            console.log(clickedItems)
+            menuItems.allowedClicks -= 1;
+            setSelectedCount(selectedCount + 1)
+            let clickedInfo = JSON.parse(localStorage.getItem('Selected_dish'));
+            clickedInfo.push(menuItems.id);
+            console.log('clickedInfo: ', clickedInfo);
+            // localStorage.setItem("Selected_dish", JSON.stringify([]))
+            localStorage.setItem("Selected_dish", JSON.stringify(clickedInfo))
+        }
     }
+
+    useEffect(() => {
+        let clickedItems = _.countBy(JSON.parse(localStorage.getItem('Selected_dish')));
+        console.log("Clicked menu items", clickedItems);
+        // Continue from here.. 
+        // For local storage stuff
+
+    }, []);
+
     return (
         <>
             <div className={selected ? "py-5 mb-5 flex dish__item--selected" : "py-5 mb-5 flex"} onClick={handleMenuItem}>
-                <div>
-                    <div className="text-xl font-medium text-black">{menuItems.name}</div>
+                <div className="w-9/12">
+                    <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
                     <p className="text-gray-500 pb-5">{menuItems.description}</p>
                     <p className="pb-5 inline-block">AED {menuItems.price}</p>
                     {

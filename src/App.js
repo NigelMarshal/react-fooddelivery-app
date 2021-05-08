@@ -11,13 +11,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [seperatedCategories, setSeperatedCategories] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [searchResult, setSeachResults] = useState([]);
-
-  // const [filteredItems, setFilteredItems] = useState(menuItems);
-
-  // const handleSearch = (event) => {
-
-  // }
+  const [searchResult, setSearchResults] = useState([]);
 
   //API Call
   useEffect(() => {
@@ -31,15 +25,13 @@ const App = () => {
         //Matching menu item with its respective category
         if (typeof category[e.category_id] != 'object')
           category[e.category_id] = [];
+        category[e.category_id].push(e);
         //Tracking stock qty to prevent over ordering 
         e.allowedClicks = e.stock ? e.stock.availability : 0;
-        category[e.category_id].push(e);
       });
-
       setMenuData(dishes.items);
       setMenuCategories(dishes.categories);
       setSeperatedCategories(category);
-
       setLoading(false);
     })()
   }, []);
@@ -48,6 +40,7 @@ const App = () => {
     return <h1>Loading...</h1>;
   }
 
+  //Search dishes
   const searchHandler = (e) => {
     let currValue = e.target.value;
     if (currValue.length > 0) {
@@ -56,15 +49,18 @@ const App = () => {
       setSearching(false);
     }
     let category = {};
-    let seperatedCategoriesCpy = { ...seperatedCategories };
-    Object.keys(seperatedCategoriesCpy).forEach(outer => {
-      seperatedCategoriesCpy[outer].forEach(inner => {
+    let seperatedCategoriesCopy = { ...seperatedCategories };
+    Object.keys(seperatedCategoriesCopy).forEach(outer => {
+      seperatedCategoriesCopy[outer].forEach(inner => {
         if (inner.name.toLowerCase().includes(currValue.toLowerCase())) {
           category[inner.category_id] = inner;
         }
       });
     })
-    setSeachResults(category);
+    // if (Object.entries(searchHandler).length === 0) {
+    //   console.log("hello");
+    // }
+    setSearchResults(category);
   }
 
   return (

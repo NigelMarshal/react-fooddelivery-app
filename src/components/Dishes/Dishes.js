@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DishItem from './DishItem/DishItem'
-
+import { v4 as uuid } from 'uuid';
 
 const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCategories, searching, searchResult }) => {
 
@@ -22,30 +22,27 @@ const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCa
     const [mergedMenuItems, setMergedMenuItems] = useState([]);
 
     useEffect(() => {
-        console.log("Rendered Dishes.js");
-    }, []);
-
-    useEffect(() => {
         let menuContent = [];
         if (seperatedCategories && !searching) {
-            Object.keys(seperatedCategories).forEach((outer) => {
-                menuContent.push(<h1 key={Math.floor(Math.random() * 10000000)} className="font-bold text-2xl">{menuCategories[outer - 1].name}</h1>);
-                seperatedCategories[outer].forEach((inner) => {
+            Object.keys(seperatedCategories).forEach((outer, i) => {
+                // console.log(seperatedCategories);
+                console.log();
+                menuContent.push(<h1 key={i} className="font-bold text-2xl">{menuCategories[outer - 1].name}</h1>);
+                seperatedCategories[outer].forEach((inner, j) => {
                     if (inner.stock && inner.stock.availability)
                         menuContent.push((
-                            <DishItem menuItems={inner} key={inner.id} />
+                            <DishItem key={uuid()} menuItems={inner} />
                         ));
                 });
             });
         }
         setMergedMenuItems(menuContent);
     }, [seperatedCategories, menuCategories, searching]);
-    // -----
 
     useEffect(() => {
         if (searching) {
             let menuContent = [];
-            console.log("from Dishes.js > ", searchResult);
+            // console.log("from Dishes.js > ", searchResult);
             Object.keys(searchResult).forEach((e) => {
                 menuContent.push(<DishItem menuItems={searchResult[e]} key={searchResult[e].id} />);
             });
