@@ -1,0 +1,11 @@
+.dish__item--selected::before {
+  border-style: solid;
+  border-left: solid 7px;
+  border-color: #1258ff;
+  margin-right: 0.5em;
+  opacity: 1;
+  -webkit-transition: all 1s ease;
+  content: "";
+  position: relative;
+  margin-left: -14px;
+}

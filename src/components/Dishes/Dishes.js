@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DishItem from './DishItem/DishItem'
 
 
-const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCategories }) => {
+const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCategories, searching, searchResult }) => {
 
 
     // const handleMenuItem = (item) => {
@@ -22,10 +22,14 @@ const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCa
     const [mergedMenuItems, setMergedMenuItems] = useState([]);
 
     useEffect(() => {
+        console.log("Rendered Dishes.js");
+    }, []);
+
+    useEffect(() => {
         let menuContent = [];
-        if (seperatedCategories) {
+        if (seperatedCategories && !searching) {
             Object.keys(seperatedCategories).forEach((outer) => {
-                menuContent.push(<h1 className="font-bold text-2xl">{menuCategories[outer - 1].name}</h1>);
+                menuContent.push(<h1 key={Math.floor(Math.random() * 10000000)} className="font-bold text-2xl">{menuCategories[outer - 1].name}</h1>);
                 seperatedCategories[outer].forEach((inner) => {
                     if (inner.stock && inner.stock.availability)
                         menuContent.push((
@@ -35,8 +39,19 @@ const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCa
             });
         }
         setMergedMenuItems(menuContent);
-    }, [seperatedCategories, menuCategories]);
+    }, [seperatedCategories, menuCategories, searching]);
     // -----
+
+    useEffect(() => {
+        if (searching) {
+            let menuContent = [];
+            console.log("from Dishes.js > ", searchResult);
+            Object.keys(searchResult).forEach((e) => {
+                menuContent.push(<DishItem menuItems={searchResult[e]} key={searchResult[e].id} />);
+            });
+            setMergedMenuItems(menuContent);
+        }
+    }, [searchResult]);
 
     return (
         <div className="container mx-auto pt-6">

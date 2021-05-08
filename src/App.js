@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Search from './components/Search/Search'
 import Header from './components/Header/Header'
@@ -10,6 +10,9 @@ const App = () => {
   const [menuCategories, setMenuCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [seperatedCategories, setSeperatedCategories] = useState([]);
+  const [searching, setSearching] = useState(false);
+  const [searchResult, setSeachResults] = useState([]);
+
   // const [filteredItems, setFilteredItems] = useState(menuItems);
 
   // const handleSearch = (event) => {
@@ -20,7 +23,7 @@ const App = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      let url = "";
+      let url = "https://chatfood-cdn.s3.eu-central-1.amazonaws.com/fe-code-challenge-1/menu.json";
       let dishes = (await (await fetch(url)).json())
 
       let category = {};
@@ -36,6 +39,7 @@ const App = () => {
       setMenuData(dishes.items);
       setMenuCategories(dishes.categories);
       setSeperatedCategories(category);
+
       setLoading(false);
     })()
   }, []);
@@ -44,14 +48,30 @@ const App = () => {
     return <h1>Loading...</h1>;
   }
 
-  console.log(menuItems, "Items");
-  console.log(menuCategories, "Categories");
+  const searchHandler = (e) => {
+    let currValue = e.target.value;
+    if (currValue.length > 0) {
+      setSearching(true);
+    } else {
+      setSearching(false);
+    }
+    let category = {};
+    let seperatedCategoriesCpy = { ...seperatedCategories };
+    Object.keys(seperatedCategoriesCpy).forEach(outer => {
+      seperatedCategoriesCpy[outer].forEach(inner => {
+        if (inner.name.toLowerCase().includes(currValue.toLowerCase())) {
+          category[inner.category_id] = inner;
+        }
+      });
+    })
+    setSeachResults(category);
+  }
 
   return (
     <div className="App">
       <Header />
-      <Search placeholder="Search for dishes..." onChange={(e) => console.log(e.target.value)} />
-      <Dishes menuItems={menuItems} menuCategories={menuCategories} setSeperatedCategories={setSeperatedCategories} seperatedCategories={seperatedCategories} />
+      <Search placeholder="Search for dishes..." handleSearch={searchHandler} />
+      <Dishes menuItems={menuItems} menuCategories={menuCategories} searching={searching} searchResult={searchResult} setSeperatedCategories={setSeperatedCategories} seperatedCategories={seperatedCategories} />
     </div>
   );
 }
