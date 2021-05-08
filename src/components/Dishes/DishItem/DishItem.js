@@ -12,16 +12,18 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
     const handleMenuItem = () => {
         setSelected(true);
         console.log("menuItem", menuItems);
+        let clickedInfo = JSON.parse(localStorage.getItem('Selected_dish'));
+        if (clickedInfo == null) {
+            clickedInfo = [];
+        }
         if (menuItems.allowedClicks - 1) {
             let clickedDish = menuItems.name
             clickedItems.push(clickedDish)
             console.log(clickedItems)
             menuItems.allowedClicks -= 1;
             setSelectedCount(selectedCount + 1)
-            let clickedInfo = JSON.parse(localStorage.getItem('Selected_dish'));
             clickedInfo.push(menuItems.id);
             console.log('clickedInfo: ', clickedInfo);
-            // localStorage.setItem("Selected_dish", JSON.stringify([]))
             localStorage.setItem("Selected_dish", JSON.stringify(clickedInfo))
         }
     }
