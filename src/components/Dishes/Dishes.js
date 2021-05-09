@@ -25,9 +25,7 @@ const Dishes = ({ menuItems, menuCategories, seperatedCategories, setSeperatedCa
         let menuContent = [];
         if (seperatedCategories && !searching) {
             Object.keys(seperatedCategories).forEach((outer, i) => {
-                // console.log(seperatedCategories);
-                console.log();
-                menuContent.push(<h1 key={i} className="font-bold text-2xl">{menuCategories[outer - 1].name}</h1>);
+                menuContent.push(<h1 key={i} className="font-bold text-2xl pt-3">{menuCategories[outer - 1].name}</h1>);
                 seperatedCategories[outer].forEach((inner, j) => {
                     if (inner.stock && inner.stock.availability)
                         menuContent.push((

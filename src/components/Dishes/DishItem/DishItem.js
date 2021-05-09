@@ -11,26 +11,34 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
 
     const handleMenuItem = () => {
         setSelected(true);
-        console.log("menuItem", menuItems);
         let clickedInfo = JSON.parse(localStorage.getItem('Selected_dish'));
         if (clickedInfo == null) {
             clickedInfo = [];
         }
-        if (menuItems.allowedClicks - 1) {
+        if (menuItems.allowedClicks) {
             let clickedDish = menuItems.name
             clickedItems.push(clickedDish)
-            console.log(clickedItems)
+            console.log(menuItems)
+            console.log(menuItems.name, menuItems.id)
             menuItems.allowedClicks -= 1;
             setSelectedCount(selectedCount + 1)
             clickedInfo.push(menuItems.id);
-            console.log('clickedInfo: ', clickedInfo);
             localStorage.setItem("Selected_dish", JSON.stringify(clickedInfo))
         }
     }
 
+
+    // const restoreCart = () => {
+    //     let clickedItems = _.countBy(JSON.parse(localStorage.getItem('Selected_dish')));
+    //     console.log("Clicked menu items", clickedItems);
+    //     console.log(menuItems.id)
+    // }
+
     useEffect(() => {
         let clickedItems = _.countBy(JSON.parse(localStorage.getItem('Selected_dish')));
         console.log("Clicked menu items", clickedItems);
+        console.log(menuItems.id)
+        // restoreCart();
         // Continue from here.. 
         // For local storage stuff
 
@@ -41,13 +49,15 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
             <div className={selected ? "py-5 mb-5 flex dish__item--selected" : "py-5 mb-5 flex"} onClick={handleMenuItem}>
                 <div className="w-9/12">
                     <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
+
                     <p className="text-gray-500 pb-5">{menuItems.description}</p>
-                    <p className="pb-5 inline-block">AED {menuItems.price}</p>
                     {
                         (menuItems.discount_rate !== 0) &&
-                        <p className="text-red-500 line-through inline-block px-3"> {menuItems.price - (menuItems.discount_rate * menuItems.price)} </p>
+                        <p className="inline-block pr-3"> AED {Math.round((menuItems.price / 100) - (menuItems.discount_rate * (menuItems.price / 100)))} </p>
 
                     }
+                    <p className={menuItems.discount_rate == 0 ? "pb-5 inline-block" : "pb-5 inline-block line-through"}>AED {menuItems.price / 100}</p>
+
                 </div>
                 <div className="ml-auto">
                     {
