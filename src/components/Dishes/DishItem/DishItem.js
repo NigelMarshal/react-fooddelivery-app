@@ -1,13 +1,15 @@
 import './DishItem.css';
 import React, { useState, useEffect } from 'react'
+import Alert from '../../Alert/Alert'
 import _ from 'underscore'
 
 
 let clickedItems = []
-const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelectedItem }) => {
+const DishItem = ({ menuItems }) => {
 
     const [selected, setSelected] = useState();
     const [selectedCount, setSelectedCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleMenuItem = () => {
         setSelected(true);
@@ -25,6 +27,13 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
             clickedInfo.push(menuItems.id);
             localStorage.setItem("Selected_dish", JSON.stringify(clickedInfo))
         }
+        if (menuItems.allowedClicks === 0) {
+            togglePopup();
+        }
+    }
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
     }
 
 
@@ -42,10 +51,16 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
         // Continue from here.. 
         // For local storage stuff
 
-    }, []);
+    }, [menuItems.id]);
 
     return (
         <>
+            {isOpen && <Alert
+                content={<>
+                    <b>Your order is being processed!</b>
+                </>}
+                handleClose={togglePopup}
+            />}
             <div className={selected ? "py-5 mb-5 flex dish__item--selected" : "py-5 mb-5 flex"} onClick={handleMenuItem}>
                 <div className="w-9/12">
                     <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
@@ -56,7 +71,7 @@ const DishItem = ({ menuItems, seperatedCategories, menuCategories, handleSelect
                         <p className="inline-block pr-3"> AED {Math.round((menuItems.price / 100) - (menuItems.discount_rate * (menuItems.price / 100)))} </p>
 
                     }
-                    <p className={menuItems.discount_rate == 0 ? "pb-5 inline-block" : "pb-5 inline-block line-through"}>AED {menuItems.price / 100}</p>
+                    <p className={menuItems.discount_rate === 0 ? "pb-5 inline-block" : "pb-5 inline-block line-through text-gray-500"}>AED {menuItems.price / 100}</p>
 
                 </div>
                 <div className="ml-auto">

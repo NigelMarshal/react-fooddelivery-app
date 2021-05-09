@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Search from './components/Search/Search'
 import Header from './components/Header/Header'
@@ -9,7 +9,7 @@ const App = () => {
   const [menuItems, setMenuData] = useState([]);
   const [menuCategories, setMenuCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [seperatedCategories, setSeperatedCategories] = useState([]);
+  const [separatedCategories, setSeparatedCategories] = useState([]);
   const [searching, setSearching] = useState(false);
   const [searchResult, setSearchResults] = useState([]);
 
@@ -31,7 +31,7 @@ const App = () => {
       });
       setMenuData(dishes.items);
       setMenuCategories(dishes.categories);
-      setSeperatedCategories(category);
+      setSeparatedCategories(category);
       setLoading(false);
     })()
   }, []);
@@ -49,9 +49,9 @@ const App = () => {
       setSearching(false);
     }
     let category = {};
-    let seperatedCategoriesCopy = { ...seperatedCategories };
-    Object.keys(seperatedCategoriesCopy).forEach(outer => {
-      seperatedCategoriesCopy[outer].forEach(inner => {
+    let separatedCategoriesCopy = { ...separatedCategories };
+    Object.keys(separatedCategoriesCopy).forEach(outer => {
+      separatedCategoriesCopy[outer].forEach(inner => {
         if (inner.name.toLowerCase().includes(currValue.toLowerCase())) {
           category[inner.category_id] = inner;
         }
@@ -67,7 +67,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Search placeholder="Search for dishes..." handleSearch={searchHandler} />
-      <Dishes menuItems={menuItems} menuCategories={menuCategories} searching={searching} searchResult={searchResult} setSeperatedCategories={setSeperatedCategories} seperatedCategories={seperatedCategories} />
+      <Dishes menuItems={menuItems} menuCategories={menuCategories} searching={searching} searchResult={searchResult} setSeparatedCategories={setSeparatedCategories} separatedCategories={separatedCategories} />
     </div>
   );
 }
