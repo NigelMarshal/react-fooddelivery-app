@@ -2,32 +2,16 @@ import React, { useState, useEffect } from 'react';
 import DishItem from './DishItem/DishItem'
 import { v4 as uuid } from 'uuid';
 
-const Dishes = ({ menuItems, menuCategories, separatedCategories, setSeparatedCategories, searching, searchResult }) => {
-
-
-    // const handleMenuItem = (item) => {
-    //     console.log("Clicked on ", item);
-    //     item.allowedClicks -= 1;
-    //     Object.keys(separatedCategories).forEach((outer) => {
-    //         separatedCategories[outer].forEach((inner) => {
-    //             if (item.id === inner.id) {
-    //                 inner = item;
-    //             }
-    //         });
-    //     })
-    //     setSeparatedCategories(separatedCategories);
-    // }
-
-    // Change later
+const Dishes = ({ menuCategories, separatedCategories, searching, searchResult }) => {
     const [mergedMenuItems, setMergedMenuItems] = useState([]);
-
-
     useEffect(() => {
         let menuContent = [];
+        //Sort items in their respective categories
         if (separatedCategories && !searching) {
             Object.keys(separatedCategories).forEach((outer, i) => {
                 menuContent.push(<h1 key={i} className="font-bold text-2xl pt-3">{menuCategories[outer - 1].name}</h1>);
                 separatedCategories[outer].forEach((inner, j) => {
+                    //Only display items which are in stock
                     if (inner.stock && inner.stock.availability)
                         menuContent.push((
                             <DishItem key={uuid()} menuItems={inner} />
@@ -38,6 +22,7 @@ const Dishes = ({ menuItems, menuCategories, separatedCategories, setSeparatedCa
         setMergedMenuItems(menuContent);
     }, [separatedCategories, menuCategories, searching]);
 
+    //Display filtered searched dishes
     useEffect(() => {
         if (searching) {
             let menuContent = [];

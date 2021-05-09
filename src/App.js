@@ -27,7 +27,7 @@ const App = () => {
           category[e.category_id] = [];
         category[e.category_id].push(e);
         //Tracking stock qty to prevent over ordering 
-        e.allowedClicks = e.stock ? e.stock.availability : 0;
+        e.dishesInStock = e.stock ? e.stock.availability : 0;
       });
       setMenuData(dishes.items);
       setMenuCategories(dishes.categories);
@@ -43,11 +43,7 @@ const App = () => {
   //Search dishes
   const searchHandler = (e) => {
     let currValue = e.target.value;
-    if (currValue.length > 0) {
-      setSearching(true);
-    } else {
-      setSearching(false);
-    }
+    (currValue.length > 0) ? setSearching(true) : setSearching(false);
     let category = {};
     let separatedCategoriesCopy = { ...separatedCategories };
     Object.keys(separatedCategoriesCopy).forEach(outer => {
@@ -57,9 +53,6 @@ const App = () => {
         }
       });
     })
-    // if (Object.entries(searchHandler).length === 0) {
-    //   console.log("hello");
-    // }
     setSearchResults(category);
   }
 
@@ -67,7 +60,14 @@ const App = () => {
     <div className="App">
       <Header />
       <Search placeholder="Search for dishes..." handleSearch={searchHandler} />
-      <Dishes menuItems={menuItems} menuCategories={menuCategories} searching={searching} searchResult={searchResult} setSeparatedCategories={setSeparatedCategories} separatedCategories={separatedCategories} />
+      <Dishes
+        menuItems={menuItems}
+        menuCategories={menuCategories}
+        searching={searching}
+        searchResult={searchResult}
+        setSeparatedCategories={setSeparatedCategories}
+        separatedCategories={separatedCategories}
+      />
     </div>
   );
 }
