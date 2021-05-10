@@ -1,7 +1,7 @@
 import React from 'react';
 
 const resetSelections = () => {
-    window.localStorage.removeItem('Selected_dish');
+    window.localStorage.clear();
 }
 const Header = () => {
     return (
