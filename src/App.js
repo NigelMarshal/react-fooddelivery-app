@@ -3,6 +3,7 @@ import './App.css';
 import Search from './components/Search/Search'
 import Header from './components/Header/Header'
 import Dishes from './components/Dishes/Dishes'
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 
 const App = () => {
 
@@ -37,7 +38,7 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <LoadingSpinner />
   }
 
   //Search dishes
