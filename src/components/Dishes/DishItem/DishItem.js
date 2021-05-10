@@ -30,11 +30,11 @@ const DishItem = ({ menuItems }) => {
         <>
             {/* Check for inventory/cart status */}
             {isOpen && <StockAlert />}
-            <div className={selected || selectedCount > 0 ? "py-5 mb-5 flex dish__item--selected" : "py-5 mb-5 flex"} onClick={handleMenuItem}>
+            <div className={selected || selectedCount > 0 ? "py-5 mb-5 flex dish__item--selected cursor-pointer" : "py-5 mb-5 flex cursor-pointer"} onClick={handleMenuItem}>
                 <div className="w-9/12">
                     {/* Display the counter for each selected dish */}
                     <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
-                    <p className="text-gray-500 pb-5">{menuItems.description}</p>
+                    <p className="text-gray-400 pb-5">{menuItems.description}</p>
                     {/* Calculating price and conditionally rendering the discount. 
                     Prices are rounded off to the nearest integer */}
                     {
