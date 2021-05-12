@@ -34,7 +34,7 @@ const Dishes = ({ menuCategories, separatedCategories, searching, searchResult }
     }, [searchResult, searching]);
 
     return (
-        <div className="container mx-auto pt-6">
+        <div className="container mx-auto pt-6" data-testid="dishes">
             <div className=" justify-left max-w-screen-sm mx-auto px-10 pb-5 ">
                 {mergedMenuItems}
             </div>

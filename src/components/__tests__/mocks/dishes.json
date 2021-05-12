@@ -1,0 +1,41 @@
+[{
+    "id":"69",
+    "name":"Dish1",
+    "url":"dish-1",
+    "price":5000,
+    "discount_rate":0.5,
+    "stock":{
+       "availability":20
+    },
+    "description":"Dish1 description",
+    "photo":null,
+    "category_id":"1"
+ },
+ {
+    "id":"42",
+    "name":"Dish2",
+    "url":"dish-2",
+    "price":2000,
+    "discount_rate":0.2,
+    "stock":{
+       "availability":10
+    },
+    "description":"Dish2 description",
+    "photo":"https://chatfood-cdn.s3.eu-central-1.amazonaws.com/fe-code-challenge-1/chicken-avocado.jpg",
+    "category_id":"4"
+ },
+ {
+    "id":"2",
+    "name":"No Dish",
+    "url":"dish-3",
+    "price":1000,
+    "discount_rate":0.5,
+    "stock":{
+       "availability":2
+    },
+    "description":"Dish2 description",
+    "photo":"https://chatfood-cdn.s3.eu-central-1.amazonaws.com/fe-code-challenge-1/chicken-avocado.jpg",
+    "category_id":"4"
+ }
+
+]

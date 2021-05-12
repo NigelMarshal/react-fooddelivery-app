@@ -29,6 +29,8 @@ const App = () => {
         category[e.category_id].push(e);
         //Tracking stock qty to prevent over ordering 
         e.dishesInStock = e.stock ? e.stock.availability : 0;
+        //Get value from local Storage if available (Value depending on how many items user added to cart)
+        e.dishesInStock = localStorage.getItem(e.name) ? e.dishesInStock - localStorage.getItem(e.name) : e.dishesInStock;
       });
       setMenuData(dishes.items);
       setMenuCategories(dishes.categories);

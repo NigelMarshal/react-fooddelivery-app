@@ -30,7 +30,10 @@ const DishItem = ({ menuItems }) => {
         <>
             {/* Check for inventory/cart status */}
             {isOpen && <StockAlert />}
-            <div className={selected || selectedCount > 0 ? "py-5 mb-5 flex dish__item--selected cursor-pointer" : "py-5 mb-5 flex cursor-pointer"} onClick={handleMenuItem}>
+            <div className={selected || selectedCount > 0 ? "py-5 mb-5 flex dish__item--selected cursor-pointer" : "py-5 mb-5 flex cursor-pointer"}
+                onClick={handleMenuItem}
+                data-testid="dishItems"
+            >
                 <div className="w-9/12">
                     {/* Display the counter for each selected dish */}
                     <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
