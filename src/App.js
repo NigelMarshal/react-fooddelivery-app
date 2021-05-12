@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      let url = "https://chatfood-cdn.s3.eu-central-1.amazonaws.com/fe-code-challenge-1/menu.json";
+      let url = "https://nigelmarshal.github.io/chatfood-api.json";
       let dishes = (await (await fetch(url)).json())
 
       let category = {};
