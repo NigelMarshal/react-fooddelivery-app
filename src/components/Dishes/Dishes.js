@@ -9,7 +9,7 @@ const Dishes = ({ menuCategories, separatedCategories, searching, searchResult }
         //Sort items in their respective categories
         if (separatedCategories && !searching) {
             Object.keys(separatedCategories).forEach((outer, i) => {
-                menuContent.push(<h1 key={i} className="font-bold text-2xl pt-3">{menuCategories[outer - 1].name}</h1>);
+                menuContent.push(<h2 key={i} className="font-semibold text-2xl pt-3">{menuCategories[outer - 1].name}</h2>);
                 separatedCategories[outer].forEach((inner, j) => {
                     //Only display items which are in stock
                     if (inner.stock && inner.stock.availability)

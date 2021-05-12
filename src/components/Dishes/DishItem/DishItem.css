@@ -3,8 +3,7 @@
   border-left: solid 7px;
   border-color: #1258ff;
   margin-right: 0.5em;
-  opacity: 1;
-  -webkit-transition: all 1s ease;
+  height: 130px;
   content: "";
   position: relative;
   margin-left: -14px;

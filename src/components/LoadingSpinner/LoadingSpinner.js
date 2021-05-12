@@ -3,13 +3,13 @@ import Loader from "react-loader-spinner";
 
 function LoadingSpinner() {
   return (
-    <div className="container mx-auto pt-6">
-      <div className="justify-left max-w-screen-sm mx-auto px-10 pb-5 ">
+    <div className="container mx-auto pt-8">
+      <div className="justify-left max-w-screen-sm mx-auto p-8 ">
         <Loader
-          type="Puff"
-          color="#00BFFF"
-          height={100}
-          width={100}
+          type="Rings"
+          color="#1258fe"
+          height={400}
+          width={400}
         />
       </div>
     </div>

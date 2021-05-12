@@ -3,33 +3,33 @@
 exports[`Dishes should render its content details 1`] = `
 Array [
   <div
-    className="py-5 mb-5 flex cursor-pointer"
+    className="py-4 flex cursor-pointer"
     data-testid="dishItems"
     onClick={[Function]}
   >
     <div
       className="w-9/12"
     >
-      <div
-        className="text-xl font-medium text-black"
+      <p
+        className="text-xl font-medium text-black semi-bold"
       >
          
         Dish1
-      </div>
+      </p>
       <p
-        className="text-gray-400 pb-5"
+        className="text-gray pb-5"
       >
         Dish1 description
       </p>
       <p
-        className="inline-block pr-3"
+        className="inline-block pr-3 text-black semi-bold"
       >
          AED 
         25
          
       </p>
       <p
-        className="pb-5 inline-block line-through text-gray-500"
+        className="pb-5 inline-block line-through text-gray"
       >
         AED 
         50
@@ -39,6 +39,8 @@ Array [
       className="ml-auto"
     />
   </div>,
-  <hr />,
+  <hr
+    className="light-gray"
+  />,
 ]
 `;

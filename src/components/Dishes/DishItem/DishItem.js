@@ -30,31 +30,31 @@ const DishItem = ({ menuItems }) => {
         <>
             {/* Check for inventory/cart status */}
             {isOpen && <StockAlert />}
-            <div className={selected || selectedCount > 0 ? "py-5 mb-5 flex dish__item--selected cursor-pointer" : "py-5 mb-5 flex cursor-pointer"}
+            <div className={selected || selectedCount > 0 ? "py-4 flex dish__item--selected cursor-pointer" : "py-4 flex cursor-pointer"}
                 onClick={handleMenuItem}
                 data-testid="dishItems"
             >
                 <div className="w-9/12">
                     {/* Display the counter for each selected dish */}
-                    <div className="text-xl font-medium text-black">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</div>
-                    <p className="text-gray-400 pb-5">{menuItems.description}</p>
+                    <p className="text-xl font-medium text-black semi-bold">{(selectedCount !== 0) && `${selectedCount}x`} {menuItems.name}</p>
+                    <p className="text-gray pb-5">{menuItems.description}</p>
                     {/* Calculating price and conditionally rendering the discount. 
                     Prices are rounded off to the nearest integer */}
                     {
                         (menuItems.discount_rate !== 0) &&
-                        <p className="inline-block pr-3"> AED {Math.round((menuItems.price / 100) - (menuItems.discount_rate * (menuItems.price / 100)))} </p>
+                        <p className="inline-block pr-3 text-black semi-bold"> AED {Math.round((menuItems.price / 100) - (menuItems.discount_rate * (menuItems.price / 100)))} </p>
 
                     }
-                    <p className={menuItems.discount_rate === 0 ? "pb-5 inline-block" : "pb-5 inline-block line-through text-gray-500"}>AED {menuItems.price / 100}</p>
+                    <p className={menuItems.discount_rate === 0 ? "pb-5 inline-block" : "pb-5 inline-block line-through text-gray"}>AED {menuItems.price / 100}</p>
 
                 </div>
                 <div className="ml-auto">
                     {
-                        (menuItems.photo) && <img src={menuItems.photo} width="91" height="91" alt="" />
+                        (menuItems.photo) && <img className="rounded-xl" src={menuItems.photo} width="91" height="91" alt="" />
                     }
                 </div>
             </div>
-            <hr />
+            <hr className="light-gray" />
         </>
     )
 }
