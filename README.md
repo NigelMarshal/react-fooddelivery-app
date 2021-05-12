@@ -26,6 +26,8 @@ I've also used the latest React Hooks for state management as well as for custom
 
 Speaking of local storage, the user selected dishes persist through local storage like a shopping cart and can be cleared on click of the back arrow to start over. Depending on the stock availability, dishes are capped so as to not go over the order limit and give chefs a heart attack.
 
+Items which are not in stock are automatically exempted out from being rendered and items with a discount are displayed with a price comparison.
+
 ![How to use](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
 ## Very cool! How do I get this up and running on my end?
