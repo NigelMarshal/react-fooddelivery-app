@@ -34,13 +34,6 @@ test('Dishes should show the discounted price', () => {
     expect(price).toBeInTheDocument()
 })
 
-
-
-
-
-
-
-
 test('Dishes should NOT show discounted price if there is none', () => {
     const wrapper = shallow(<DishItem menuItems={dishes[1]} />)
     expect(wrapper.find('.line-through').exists()).toBe(false);
