@@ -33,5 +33,5 @@ Items which are not in stock are removed from the menu UI and items with a disco
 ## Very cool! How do I get this up and running on my end?
 
 Just clone this repo, `cd` in to the folder, run `npm install` and then `npm start`.
-For testing, run `npm run test`
+For testing, run `npm run test`.
 EZ PZ!
