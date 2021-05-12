@@ -24,14 +24,14 @@ I used Tailwind CSS to rapidly create component styling as it is quite flexible 
 
 I've also used the latest React Hooks for state management as well as for custom hooks for local storage.
 
-Speaking of local storage, the user selected dishes persist through local storage like a shopping cart and can be cleared on click of the back arrow to start over. Depending on the stock availability, dishes are capped so as to not go over the order limit and give chefs a heart attack.
+Speaking of local storage, the user selected dishes persist through local storage like a shopping cart and can be cleared on click of the back arrow to start over. Depending on the stock availability, dishes are capped so as to not go over the order limit and give chefs a heart attack. An alert pops up for the respective item if the user places an order limit exceeding the available stock inventory.
 
-Items which are not in stock are automatically exempted out from being rendered and items with a discount are displayed with a price comparison.
+Items which are not in stock are removed from the menu UI and items with a discount are displayed with a price comparison. The user can also search and filter out the dishes they crave.
 
 ![How to use](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
 ## Very cool! How do I get this up and running on my end?
 
-Just clone this repo, `cd` in and run `npm install` and then `npm start`.
+Just clone this repo, `cd` in to the folder, run `npm install` and then `npm start`.
 For testing, run `npm run test`
 EZ PZ!
