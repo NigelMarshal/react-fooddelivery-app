@@ -17,7 +17,8 @@ const App = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      let url = "https://www.nigelmarshal.com/apis/food-delivery-app.json";
+      let url =
+        "https://raw.githubusercontent.com/NigelMarshal/nigelmarshal.github.io/master/static/apis/food-delivery-app.json";
       let dishes = await (await fetch(url)).json();
 
       let category = {};
